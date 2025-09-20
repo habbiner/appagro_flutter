@@ -36,18 +36,8 @@ class _FormularioBoiState extends State<FormularioBoi> {
     final int? brinco = int.tryParse(_brincoController.text.trim());
 
     if (nome.isEmpty || peso == null || brinco == null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Erro"),
-          content: const Text("Preencha todos os campos corretamente."),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("OK"),
-            ),
-          ],
-        ),
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Preencha todos os campos corretamente")),
       );
       return;
     }
@@ -83,13 +73,16 @@ class _FormularioBoiState extends State<FormularioBoi> {
               rotulo: "Peso (kg)",
               dica: "Ex: 350.5",
               icone: Icons.monitor_weight,
+              tipo: TextInputType.number,
             ),
             Editor(
               controlador: _brincoController,
               rotulo: "Número do Brinco",
               dica: "Ex: 1234",
               icone: Icons.tag,
+              tipo: TextInputType.number,
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               child: Text(isEdit ? "Salvar Alterações" : "Cadastrar"),
               onPressed: _salvarBoi,

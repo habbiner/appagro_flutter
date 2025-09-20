@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/cadastro_boi/lista.dart';
 
-void main() => runApp(BoiApp());
+void main() => runApp(const BoiApp());
 
 class BoiApp extends StatelessWidget {
   const BoiApp({super.key});
@@ -13,7 +13,6 @@ class BoiApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
-        primaryColor: Colors.brown.shade900,
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.brown.shade900,
           foregroundColor: Colors.white,
@@ -39,6 +38,10 @@ class BoiApp extends StatelessWidget {
         ),
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 16),
+          titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
       home: const ListaBoi(),

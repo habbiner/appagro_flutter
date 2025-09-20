@@ -5,12 +5,14 @@ class Editor extends StatelessWidget {
   final String? rotulo;
   final String? dica;
   final IconData? icone;
+  final TextInputType? tipo;
 
   const Editor({
     this.controlador,
     this.rotulo,
     this.dica,
     this.icone,
+    this.tipo,
     super.key,
   });
 
@@ -20,15 +22,13 @@ class Editor extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: controlador,
-        style: const TextStyle(fontSize: 20.0),
+        style: const TextStyle(fontSize: 18.0),
         decoration: InputDecoration(
           icon: icone != null ? Icon(icone) : null,
           labelText: rotulo,
           hintText: dica,
         ),
-        keyboardType: icone == Icons.monitor_weight || icone == Icons.tag
-            ? TextInputType.number
-            : TextInputType.text,
+        keyboardType: tipo ?? TextInputType.text,
       ),
     );
   }

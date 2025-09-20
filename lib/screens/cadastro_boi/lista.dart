@@ -69,11 +69,8 @@ class _ListaBoiState extends State<ListaBoi> {
   @override
   void initState() {
     super.initState();
-    // Listener que atualiza a lista enquanto o usuário digita
     _buscaController.addListener(() {
-      setState(() {
-        // rebuild automático, o getter _boisFiltrados filtra os bois
-      });
+      setState(() {});
     });
   }
 
@@ -128,12 +125,23 @@ class _ListaBoiState extends State<ListaBoi> {
                     itemBuilder: (context, indice) {
                       final boi = lista[indice];
                       return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                         child: ListTile(
-                          leading: const Icon(Icons.pets),
-                          title: Text(boi.nome),
-                          subtitle: Text(
-                            "Peso: ${boi.pesoFormatado} kg - Brinco: ${boi.numeroBrinco}",
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.brown.shade200,
+                            child: const Icon(Icons.pets, color: Colors.white),
                           ),
+                          title: Text(
+                            boi.nome,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            "Peso: ${boi.pesoFormatado} kg\nBrinco: ${boi.numeroBrinco}\nCadastro: ${boi.dataFormatada}",
+                          ),
+                          isThreeLine: true,
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
