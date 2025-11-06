@@ -1,50 +1,39 @@
 import 'package:flutter/material.dart';
-import 'screens/cadastro_boi/lista.dart';
+import 'database/app_database.dart';
+import 'screens/animais/lista_animais.dart';
 
-void main() => runApp(const BoiApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Inicializa o banco FAKE (funciona instantaneamente)
+  await AppDatabase.initialize();
+  
+  runApp(const CuidadoPecuarioApp());
+}
 
-class BoiApp extends StatelessWidget {
-  const BoiApp({super.key});
+class CuidadoPecuarioApp extends StatelessWidget {
+  const CuidadoPecuarioApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cadastro de Bois',
+      title: 'Cuidado Pecuário',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          primary: Colors.green,
+          secondary: Colors.brown[400]!,
+        ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.brown.shade900,
+          backgroundColor: Colors.green,
           foregroundColor: Colors.white,
-          titleTextStyle: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.brown.shade700,
-          foregroundColor: Colors.white,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.brown.shade700,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 16),
-          titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          elevation: 0,
+          centerTitle: false,
         ),
       ),
-      home: const ListaBoi(),
+      home: const ListaAnimaisScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
